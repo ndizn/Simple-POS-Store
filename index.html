@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Infinity POS</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<!-- ADDED: decorative starfield + endless rail track for the "infinity train" theme -->
+<div class="starfield"></div>
+<div class="rail-track"></div>
+
+<div class="container">
+<div class="sidebar">
+
+    <div class="logo">
+        <span class="infinity">∞</span>
+
+        <div class="logo-text">
+            <h2>Infinity</h2>
+            <p>STORE</p>
+        </div>
+    </div>
+
+    <button class="nav-btn active" data-section="dashboard">🏠 Dashboard</button>
+    <button class="nav-btn" data-section="pos">🛒 Point of Sale</button>
+    <button class="nav-btn" data-section="transactions">🧾 Transactions</button>
+
+</div>
+
+<div class="main">
+
+    <!-- ===========================
+         DASHBOARD
+    =========================== -->
+    <section id="dashboard" class="page active">
+        <h1>Dashboard</h1>
+        <p>Welcome to the Store Infinity POS System.</p>
+
+        <div id="statCards" class="stat-cards"></div>
+
+        <div class="dash-columns">
+            <div class="dash-box">
+                <h3>Low Stock (5 or fewer)</h3>
+                <div id="lowStockList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         POINT OF SALE
+    =========================== -->
+    <section id="pos" class="page">
+        <h1>Point of Sale</h1>
+
+        <div class="pos-layout">
+
+            <div class="pos-products">
+                <input type="text" id="productSearch" class="search-input" placeholder="Search products...">
+                <div id="productList"></div>
+            </div>
+
+            <div class="cart-panel" id="cartPanel">
+                <div class="cart-panel-header">
+                    <h3>Current Sale</h3>
+                    <button id="closeCartBtn" class="cart-close-btn" aria-label="Close cart">✕</button>
+                </div>
+                <div id="cartItems" class="cart-items"></div>
+
+                <div class="cart-summary">
+                    <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">₱0.00</span></div>
+                    <!-- ADDED: discount row — shows automatically when subtotal exceeds ₱1000 -->
+                    <div class="cart-row discount-row hidden" id="discountRow">
+                        <span>Discount (10%)</span><span id="cartDiscount">-₱0.00</span>
+                    </div>
+                    <div class="cart-row cart-total"><span>Total</span><span id="cartTotal">₱0.00</span></div>
+                </div>
+
+                <label class="cash-label">Cash Received
+                    <input type="number" id="cashReceived" min="0" placeholder="0.00">
+                </label>
+                <div class="cart-row"><span>Change</span><span id="changeDue">₱0.00</span></div>
+
+                <button id="checkoutBtn" class="checkout-btn">Complete Sale</button>
+                <button id="clearCartBtn" class="clear-btn">Clear Cart</button>
+            </div>
+
+        </div>
+
+        <!-- ADDED: mobile-only backdrop + floating button so the cart can pop
+             up over the product grid instead of sitting at the bottom of the page -->
+        <div id="cartOverlay" class="cart-overlay"></div>
+        <button id="viewCartBtn" class="view-cart-fab">
+            🛒 View Cart <span id="viewCartCount">0</span>
+        </button>
+    </section>
+
+    <!-- ===========================
+         TRANSACTIONS
+    =========================== -->
+    <section id="transactions" class="page">
+        <h1>Transaction Record</h1>
+        <div id="transactionsList"></div>
+    </section>
+
+
+</div>
+
+</div>
+
+<!-- ADDED: receipt modal — populated and shown by generateReceipt() in js.js -->
+<div id="receiptModal" class="receipt-modal hidden">
+    <div class="receipt-modal-inner">
+        <div id="receiptContent" class="receipt-paper"></div>
+        <div class="receipt-modal-actions">
+            <button id="closeReceiptBtn" class="secondary-btn">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="js.js"></script>
+
+</body>
+</html>
